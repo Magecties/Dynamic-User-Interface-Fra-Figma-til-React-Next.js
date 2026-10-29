@@ -1,0 +1,100 @@
+/* Figma: the component "Modal". Use your tokens with var(). */
+
+/* The dialog itself. The padding sits on .content, so a click on the dialog is always a click on the backdrop. */
+.modal {
+  width: 500px;
+  max-width: calc(100% - 32px);
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: var(--border-radius-md);
+  background: var(--color-neutral-white);
+  box-shadow: 0 20px 48px -12px rgb(0 0 0 / 0.12);
+}
+
+/* Auto layout -> flexbox */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gaps-md);
+  padding: var(--paddings-lg);
+}
+
+/* Separator, title and text */
+.separator {
+  width: 40px;
+  height: 5px;
+  border: none;
+  border-radius: 3px;
+  background: var(--color-primary);
+}
+
+.title {
+  color: var(--color-neutral-grey-900);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semi-bold);
+  line-height: normal;
+  letter-spacing: -0.02em; /* Figma: -2% */
+}
+
+.text {
+  color: var(--color-neutral-grey-800);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 25px;
+}
+
+/* Smart Animate -> transition. Closed is the state the modal animates from and back to.
+   Closed, the modal is small and sits on top of the pill, so it unfolds from there. */
+.modal {
+  opacity: 0;
+  scale: 0.2;
+  translate: var(--origin-x) var(--origin-y);
+  transition:
+    opacity 300ms ease-out,
+    scale 300ms ease-out,
+    translate 300ms ease-out,
+    overlay 300ms ease-out allow-discrete,
+    display 300ms ease-out allow-discrete;
+}
+
+.modal[open] {
+  opacity: 1;
+  scale: 1;
+  translate: 0 0;
+}
+
+.modal::backdrop {
+  background: rgb(22 22 26 / 0);
+  transition:
+    background 300ms ease-out,
+    overlay 300ms ease-out allow-discrete,
+    display 300ms ease-out allow-discrete;
+}
+
+.modal[open]::backdrop {
+  background: rgb(22 22 26 / 0.4);
+}
+
+/* Where the animation starts when the modal opens */
+@starting-style {
+  .modal[open] {
+    opacity: 0;
+    scale: 0.2;
+    translate: var(--origin-x) var(--origin-y);
+  }
+
+  .modal[open]::backdrop {
+    background: rgb(22 22 26 / 0);
+  }
+}
+
+/* Less motion for users who have asked for it: the modal only fades */
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal[open] {
+    scale: none;
+    translate: none;
+  }
+}
