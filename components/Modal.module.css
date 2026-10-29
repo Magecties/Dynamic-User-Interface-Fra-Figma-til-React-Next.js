@@ -3,10 +3,38 @@
 /* The dialog itself */
 .modal {
   margin: auto; /* The reset in globals.css removes the centering of <dialog>, so add it back */
+  width: 500px;
+  max-width: calc(100% - 32px);
+  border: none;
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-neutral-white);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.12);
 }
 
 /* Auto layout -> flexbox (step 1.3) */
+/* The padding sits on .content, not on the dialog, so a click on the padding doesn't count as "outside" */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gaps-md);
+  padding: var(--paddings-lg);
+}
 
 /* Title and text (step 1.3) and the separator (step 1.4) */
+.title {
+  color: var(--color-neutral-grey-900);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semi-bold);
+  line-height: normal;
+  letter-spacing: -0.02em; /* -0.64px at 32px in Figma */
+}
+
+.text {
+  color: var(--color-neutral-grey-800);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 25px;
+}
 
 /* Smart Animate -> transition (extra 3) */

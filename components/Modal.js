@@ -17,11 +17,20 @@ export default function Modal({ title, text, isOpen, onClose }) {
     }
   }, [isOpen]);
 
+  // A click on the backdrop hits the <dialog> itself. A click on the content hits .content or its children.
+  function handleClick(e) {
+    if (e.target === dialogRef.current) {
+      dialogRef.current.close();
+    }
+  }
+
   return (
     // onClose fires both when we call close() and when the user presses Esc
-    <dialog ref={dialogRef} className={styles.modal} onClose={onClose}>
-      <h2>{title}</h2>
-      <p>{text}</p>
+    <dialog ref={dialogRef} className={styles.modal} onClose={onClose} onClick={handleClick}>
+      <div className={styles.content}>
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.text}>{text}</p>
+      </div>
     </dialog>
   );
 }
