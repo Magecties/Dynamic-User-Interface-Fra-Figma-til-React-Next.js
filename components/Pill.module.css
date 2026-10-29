@@ -17,6 +17,10 @@
   letter-spacing: -0.01em; /* -0.18px at 18px in Figma */
   white-space: nowrap;
   cursor: pointer;
+  /* Smart Animate -> transition (step 1.5): only the properties that change on hover */
+  transition:
+    border-color 200ms ease-out,
+    color 200ms ease-out;
 }
 
 /* Type=Primary and Type=Secondary -> one class per type (step 1.4) */
@@ -41,4 +45,9 @@
   color: var(--color-secondary);
 }
 
-/* Smart Animate -> transition on .pill (step 1.5) */
+/* Smart Animate -> transition on .pill (step 1.5) – turned off for users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .pill {
+    transition: none;
+  }
+}
