@@ -1,5 +1,4 @@
-import Modal from "@/components/Modal";
-import Pill from "@/components/Pill";
+import PillModal from "@/components/PillModal";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -7,14 +6,12 @@ export default function Home() {
     <main className={styles.page}>
       <h1>Components</h1>
       <div className={styles.pills}>
-        <Pill>Primary</Pill>
+        <PillModal
+          label="Primary"
+          title="Hick's Law"
+          text="Jo flere valgmuligheder, jo længere tid tager det at vælge."
+        />
       </div>
-      {/* Step 1.1: isOpen shows the modal. From step 1.2, PillModal opens it. */}
-      <Modal
-        isOpen
-        title="Hick's Law"
-        text="Jo flere valgmuligheder, jo længere tid tager det at vælge."
-      />
     </main>
   );
 }
