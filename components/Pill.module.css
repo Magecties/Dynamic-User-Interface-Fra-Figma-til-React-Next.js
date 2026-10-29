@@ -10,7 +10,6 @@
   border: 1px solid var(--color-neutral-grey-200);
   border-radius: var(--border-radius-full);
   background-color: var(--color-neutral-white);
-  color: var(--color-primary);
   font-family: inherit; /* <button> doesn't inherit the font by default */
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
@@ -21,7 +20,25 @@
 }
 
 /* Type=Primary and Type=Secondary -> one class per type (step 1.4) */
+.primary {
+  color: var(--color-primary);
+}
+
+.secondary {
+  color: var(--color-neutral-grey-900);
+}
 
 /* State=Hover -> :hover and :focus-visible (step 1.4) */
+/* In Figma, hover only changes the border (and the text on Secondary) to the type's color */
+.primary:hover,
+.primary:focus-visible {
+  border-color: var(--color-primary);
+}
+
+.secondary:hover,
+.secondary:focus-visible {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
 
 /* Smart Animate -> transition on .pill (step 1.5) */
